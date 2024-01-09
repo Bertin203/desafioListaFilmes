@@ -1,7 +1,12 @@
 package consultaFilme;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+/*
+ * Esta classe é responsável por processar e armazenar os dados retirados 
+ * do Json provido pela API do "http://www.omdbapi.com/", transferindo-os 
+ * para um novo objeto da classe Filme. A anotação @JsonProperty mapeia
+ * uma propriedade Json para um atributo de classe Java.
+ */
 public class FilmeResultDTO {
 	@JsonProperty("Title")
 	private String Title;
