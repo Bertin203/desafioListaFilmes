@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Desafio KSI</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+<link rel="stylesheet" type="text/css" media="all" th:href="@{/css/styles.css}">
+
+</head>
+<body>
+	<div class="container">
+		<nav id="nav" class="navbar navbar-dark bg-inverse">
+	  		<div align="center" class="container-fluid">
+	    		<span id="titulo-nav" class="navbar-brand mb-0 h1">Lista de Filmes</span>
+	  		</div>
+		</nav>
+		<br/>
+	    <br/>
+		<div align="center">
+			<div id="pesquisa" align="center">
+				<form th:action="@{/pesquisarFilme}" th:object="${filmeEscolhido}" method="post">
+	        		<label for="Title">Escolha um filme:</label>
+	        			<select th:field="*{Title}">
+	            			<option value="Blade Runner 2049">Blade Runner 2049</option>
+	            			<option value="Fight Club">Clube da Luta</option>
+	            			<option value="The Batman">The Batman</option>
+	            			<option value="Resident Evil">Resident Evil</option>
+	            			<option value="1917">1917</option>
+	            			<option value="The Accountant">O Contador</option>
+	            			<option value="Click">Click</option>
+	            			<option value="Oppenheimer">Oppenheimer</option>	            			
+	        			</select>
+	       				<br/>
+	       				<br/>
+	        			<input id="botao-salvar" type="submit" value="Pesquisar">
+	    		</form>									
+			</div>
+			<br/>
+			<br/>
+			<div id="tabela">
+				<table border="1" cellpadding="10">
+					<thead>
+						<tr>
+							<th>Título</th>
+							<th>Ano de Lançamento</th>
+							<th>Direção</th>
+							<th>Ações</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="filme:${listaFilmes}" >
+							<td th:text="${filme.titulo}">Nome</td>
+							<td th:text="${filme.ano}">Ano de Lançamento</td>
+							<td th:text="${filme.direcao}">Direção</td>
+							<td>
+								<a th:href="@{'editar_filme/' + ${filme.id}}">&#128221; Editar</a>
+								&nbsp;&nbsp;&nbsp;
+								<a th:href="@{'apagar_filme/' + ${filme.id}}">&#10060; Apagar</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<br/>
+	    	<br/>				
+		</div>	
+			<footer id="footer">
+				<h4 style="color:white; font-size: 14px;">Feito por: Gilberto Souza</h4>
+			</footer>		
+	</div>
+</body>
+</html>
