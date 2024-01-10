@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import consultaFilme.FilmeResultDTO;
 /*
  * Esta é a classe Spring MVC Controller, por isso recebe a anotação @Controller.
  * Ela é responsável por receber requisições e enviar respostas ao usuário.

@@ -1,4 +1,4 @@
-package consultaFilme;
+package com.desafioKSI.listafilmes;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 /*

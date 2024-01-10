@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import consultaFilme.FilmeResultDTO;
-
 /*
  * Esta é a classe de serviço. A anotação @Service marca esta classe como a responsável por conter toda
  * a lógica de negócio da aplicação. Neste caso, possibilitar as funcionalidades de listar, salvar, buscar e deletar,
@@ -32,6 +30,7 @@ public class FilmeService {
     
 	/**
 	 * Salva um novo objeto da classe Filme.
+	 * @param filme
 	 * @return "repo.save(filme)"
 	 * @author Gilberto
 	 * 
@@ -42,6 +41,7 @@ public class FilmeService {
     
     /**
 	 * Busca um filme presente no banco, pelo seu id.
+	 * @param id
 	 * @return "repo.findById(id).get()"
 	 * @author Gilberto
 	 * 
@@ -52,6 +52,7 @@ public class FilmeService {
     
     /**
 	 * Apaga um filme presente no banco, pelo seu id.
+	 * @param id
 	 * @return "repo.deleteById(id)"
 	 * @author Gilberto
 	 * 
@@ -64,7 +65,8 @@ public class FilmeService {
 	 * Busca um filme pelo título presente no campo <select>, consumindo a API do "http://www.omdbapi.com/" por meio
 	 * da classe RestTemplate, que retorn um Json, sendo este processado pela classe ResponseEntity e tendo os dados 
 	 * desejados armazenados em um objeto da classe FilmeResultDTO, que transfere os mesmos para um objeto de Filme.
-	 * @return "new FilmeResultDTO()"
+	 * @param title
+	 * @return new FilmeResultDTO()
 	 * @author Gilberto
 	 * 
 	 */
@@ -77,12 +79,24 @@ public class FilmeService {
         ResponseEntity<FilmeResultDTO> fr = restTemplate.getForEntity(builder.build().toUri(), FilmeResultDTO.class);
         FilmeResultDTO filmeResult = fr.getBody();
         
+        repo.save(filmeMaker(filmeResult));
+        return new FilmeResultDTO();
+    }
+    
+    /**
+	 * Método responsável por converter os dados oriundos do JSON 
+	 * provido pela API em atributos de um objeto da classe Filme.
+	 * @param filmeResult
+	 * @return filme
+	 * @author Gilberto
+	 * 
+	 */
+    public Filme filmeMaker(FilmeResultDTO filmeResult){
         Filme filme = new Filme();        
         filme.setTitulo(filmeResult.getTitle());
         filme.setAno(filmeResult.getYear());
         filme.setDirecao(filmeResult.getDirector());
-        
-        repo.save(filme);
-        return new FilmeResultDTO();
+
+        return filme;
     }
 }
