@@ -2,12 +2,17 @@
 
 <p> 
 Tecnologias usadas neste projeto:
+</p>
+<p> 
 	Spring Boot (Java)
 	Bootstrap (HTML5 + CSS3)
 	Thymeleaf
 	Banco de Dados MySQL
-	
+</p>
+<p> 
 IDE utilizada:
+</p>
+<p>
 	Spring Tools Suite 4
 </p>
 
